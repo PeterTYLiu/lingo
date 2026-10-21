@@ -1,3 +1,4 @@
+import { lessonsById } from "../content";
 import type { SessionSummary } from "../store/progress";
 import { Button } from "../ui/Button";
 
@@ -10,8 +11,8 @@ export function Complete({ summary, streak, onDone }: { summary: SessionSummary;
   return (
     <div className="flex h-dvh flex-col items-center justify-between px-6 pt-[max(3rem,env(safe-area-inset-top))] pb-[max(1.5rem,env(safe-area-inset-bottom))]">
       <div className="flex flex-1 flex-col items-center justify-center gap-6 text-center">
-        <p className="text-6xl">🎉</p>
-        <h1 className="text-3xl font-extrabold text-amber-500">{summary.lessonId ? "Lesson complete!" : "Review complete!"}</h1>
+        <p className="text-6xl">{summary.lessonId && lessonsById.get(summary.lessonId)?.kind === "capstone" ? "🏆" : "🎉"}</p>
+        <h1 className="text-3xl font-extrabold text-amber-500">{!summary.lessonId ? "Review complete!" : lessonsById.get(summary.lessonId)?.kind === "capstone" ? "Unit complete!" : "Lesson complete!"}</h1>
         <div className="grid w-full grid-cols-3 gap-3">
           {stats.map((s) => (
             <div key={s.label} className={`rounded-2xl border-2 ${s.cls} p-3`}>

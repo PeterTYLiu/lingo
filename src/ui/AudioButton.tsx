@@ -12,7 +12,7 @@ export function AudioButton({ text, size = "md" }: { text: string; size?: "sm" |
         e.stopPropagation();
         tts.say(text);
       }}
-      className={`${dims} inline-flex shrink-0 items-center justify-center rounded-2xl border-2 border-b-4 border-sky-600 bg-sky-500 text-white active:translate-y-px active:border-b-2`}
+      className={`${dims} inline-flex shrink-0 items-center justify-center rounded-2xl border-2 border-b-4 border-sky-600 bg-sky-500 text-white active:translate-y-[2px] active:border-b-2 active:mb-[2px]`}
     >
       🔊
     </button>

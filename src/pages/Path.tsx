@@ -59,7 +59,7 @@ export function Path() {
                       done ? "border-amber-600 bg-amber-400 text-white" : unlocked ? `${style.bg} ${style.border} text-white` : "border-slate-300 bg-slate-200 text-slate-400"
                     } ${isNext ? "ring-4 ring-offset-4 ring-green-400" : ""}`}
                   >
-                    {done ? "✓" : !unlocked ? "🔒" : l.kind === "phrases" ? "💬" : i + 1}
+                    {done ? "✓" : !unlocked ? "🔒" : l.kind === "capstone" ? "🏆" : l.kind === "phrases" ? "💬" : i + 1}
                   </span>
                 );
                 return (

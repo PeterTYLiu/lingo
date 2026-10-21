@@ -41,7 +41,7 @@ export function LessonPage() {
   }, [lesson]);
 
   if (!lesson || !isLessonUnlocked(lesson.id, lessons)) return <Navigate to="/" replace />;
-  return <SessionRunner steps={steps} lessonId={lesson.id} baseXp={10} />;
+  return <SessionRunner steps={steps} lessonId={lesson.id} baseXp={lesson.kind === "capstone" ? 20 : 10} />;
 }
 
 export function ReviewPage() {

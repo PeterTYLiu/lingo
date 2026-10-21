@@ -19,7 +19,7 @@ const today = "2026-10-20";
 describe("buildLesson", () => {
   it("introduces every new term before testing it", () => {
     for (const u of units) {
-      for (const l of u.lessons) {
+      for (const l of u.lessons.filter((l) => l.kind !== "capstone")) {
         const steps = buildLesson(l, {}, today, { speaking: true, rng: seeded(1) });
         const introduced = new Set<string>();
         for (const s of steps) {
@@ -76,6 +76,28 @@ describe("tile pinyin", () => {
       [...s.term.hanzi].forEach((ch, i) => {
         expect(s.tiles.find((t) => t.text === ch)?.pinyin).toBe(syllables[i]);
       });
+    }
+  });
+});
+
+describe("capstones", () => {
+  it("every unit ends with a capstone covering all its terms and phrases", () => {
+    for (const u of units) {
+      const last = u.lessons[u.lessons.length - 1];
+      expect(last.kind, u.id).toBe("capstone");
+      const taught = u.lessons.filter((l) => l.kind !== "capstone").flatMap((l) => l.termIds);
+      expect(new Set(last.termIds)).toEqual(new Set(taught));
+    }
+  });
+
+  it("tests every unit term without intros", () => {
+    for (const u of units) {
+      const l = u.lessons[u.lessons.length - 1];
+      const steps = buildLesson(l, {}, today, { speaking: true, rng: seeded(6) });
+      expect(steps.some((s) => s.kind === "intro"), l.id).toBe(false);
+      const tested = new Set(steps.flatMap(exerciseTermIds));
+      for (const id of l.termIds) expect(tested.has(id), `${l.id}: ${id}`).toBe(true);
+      expect(steps.filter((s) => s.kind === "speak").length).toBeLessThanOrEqual(2);
     }
   });
 });

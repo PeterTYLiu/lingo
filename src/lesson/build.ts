@@ -48,6 +48,7 @@ export function weakestTerms(progress: Record<string, TermProgress>, today: stri
  */
 export function buildLesson(lesson: Lesson, progress: Record<string, TermProgress>, today: string, opts: BuildOptions): Exercise[] {
   const rng = opts.rng ?? Math.random;
+  if (lesson.kind === "capstone") return buildCapstone(lesson, opts.speaking, rng);
   const fresh = lesson.termIds.map(getTerm);
   const review = weakestTerms(progress, today, 2, new Set(lesson.termIds)).filter((t) => {
     const p = progress[t.id];
@@ -58,6 +59,19 @@ export function buildLesson(lesson: Lesson, progress: Record<string, TermProgres
   for (const t of fresh) steps.push(intro(t), recognition(t, rng));
   if (fresh.length >= 3) steps.push(matchPairs(fresh, rng));
   steps.push(...shuffle(production([...fresh, ...review], opts.speaking, rng), rng));
+  return steps;
+}
+
+/**
+ * A unit capstone: everything was already taught, so no intros. A match round
+ * of the unit's words warms up, then every term gets one exercise: half
+ * recognition, half production, shuffled together.
+ */
+function buildCapstone(lesson: Lesson, speaking: boolean, rng: Rng): Exercise[] {
+  const terms = shuffle(lesson.termIds.map(getTerm), rng);
+  const half = Math.ceil(terms.length / 2);
+  const steps: Exercise[] = [matchPairs(terms.filter((t) => t.kind === "word"), rng)];
+  steps.push(...shuffle([...terms.slice(half).map((t) => recognition(t, rng)), ...production(terms.slice(0, half), speaking, rng)], rng));
   return steps;
 }
 

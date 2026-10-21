@@ -18,7 +18,6 @@ function Toggle({ label, hint, value, onChange }: { label: string; hint?: string
 export function Settings() {
   const state = useProgress();
   const set = <K extends keyof S>(k: K) => (v: S[K]) => state.setSetting(k, v);
-  const [backup, setBackup] = useState<string | null>(null);
   const [importText, setImportText] = useState("");
   const [message, setMessage] = useState<string | null>(null);
   const [confirmReset, setConfirmReset] = useState(false);
@@ -34,18 +33,15 @@ export function Settings() {
     }
   };
 
-  const share = async () => {
-    const json = exportData(state);
-    const file = new File([json], `hanghua-progress-${new Date().toISOString().slice(0, 10)}.json`, { type: "application/json" });
-    if (navigator.canShare?.({ files: [file] })) {
-      try {
-        await navigator.share({ files: [file], title: "行话 progress" });
-        return;
-      } catch {
-        /* cancelled or unsupported: fall back to showing the text */
-      }
-    }
-    setBackup(json);
+  const download = () => {
+    const url = URL.createObjectURL(new Blob([exportData(state)], { type: "application/json" }));
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `hanghua-progress-${new Date().toISOString().slice(0, 10)}.json`;
+    a.click();
+    // Revoke after the click has been handled so the download isn't cancelled.
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    setMessage("Backup saved to your downloads.");
   };
 
   return (
@@ -65,11 +61,8 @@ export function Settings() {
 
       <section className="flex flex-col gap-3">
         <h2 className="text-lg font-bold">Backup</h2>
-        <p className="text-sm text-slate-500">Progress lives only on this device. Save a backup to move it or keep it safe.</p>
-        <Button variant="secondary" onClick={share}>Save backup</Button>
-        {backup && (
-          <textarea readOnly value={backup} onFocus={(e) => e.target.select()} className="h-32 rounded-xl border-2 border-slate-200 p-2 font-mono text-xs" />
-        )}
+        <p className="text-sm text-slate-500">Progress lives only on this device. Save a backup file (e.g. to Google Drive), then use "Restore from file" on another device.</p>
+        <Button variant="secondary" onClick={download}>Save backup</Button>
         <Button variant="secondary" onClick={() => fileInput.current?.click()}>Restore from file</Button>
         <input
           ref={fileInput}

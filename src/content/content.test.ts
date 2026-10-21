@@ -21,7 +21,7 @@ describe("content", () => {
 
   it("teaches every term a phrase uses before the phrase", () => {
     const taughtBy = new Map<string, number>();
-    allLessons.forEach((l, i) => l.termIds.forEach((id) => taughtBy.set(id, i)));
+    allLessons.forEach((l, i) => l.kind !== "capstone" && l.termIds.forEach((id) => taughtBy.set(id, i)));
     for (const p of allPhrases) {
       for (const part of p.parts) {
         if (!part.termId) continue;

@@ -22,7 +22,7 @@ export type Term = {
   note?: string;
 };
 
-export type Lesson = { id: string; title: string; kind: "words" | "phrases"; termIds: string[] };
+export type Lesson = { id: string; title: string; kind: "words" | "phrases" | "capstone"; termIds: string[] };
 
 export type Track = "cs" | "web";
 
@@ -103,13 +103,14 @@ const chunk = <T,>(xs: T[], size: number): T[][] => {
   return Array.from({ length: n }, (_, k) => xs.slice(k * per, (k + 1) * per)).filter((c) => c.length);
 };
 
-/** A unit: word lessons of roughly five terms, then phrase lessons that put them to use. */
+/** A unit: word lessons of roughly five terms, phrase lessons that put them to use, then a capstone over all of it. */
 export function unit(id: string, track: Track, title: string, titleZh: string, terms: Term[], phrases: PhraseSpec[] = []) {
   const lessons: Lesson[] = [
     ...chunk(terms, 5).map((c, k) => ({ id: `${id}-${k + 1}`, title: `${title} ${k + 1}`, kind: "words" as const, termIds: c.map((t) => t.id) })),
     ...(phrases.length
       ? chunk(phrases, 4).map((c, k) => ({ id: `${id}-p${k + 1}`, title: `${title}: phrases ${k + 1}`, kind: "phrases" as const, termIds: c.map((p) => p.id) }))
       : []),
+    { id: `${id}-c`, title: `${title}: capstone`, kind: "capstone", termIds: [...terms, ...phrases].map((t) => t.id) },
   ];
   return { unit: { id, track, title, titleZh, lessons } as Unit, terms, phrases };
 }
