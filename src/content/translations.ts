@@ -84,6 +84,11 @@ export const translations: Record<string, string[]> = {
   shanchujiedian: ["删节点"],
   fanzhuanlianbiao: ["反转链表"],
 
+  // c1 Machine learning
+  xunlianmoxing: ["模型训练"],
+  biaozhushuju: ["数据标注"],
+  suanlibugou: ["算力不足"],
+
   // b4 Frontend frameworks
   ku: ["函数库", "类库"],
   danyeyingyong: ["单页面应用"],
@@ -115,6 +120,13 @@ export const translations: Record<string, string[]> = {
   jiasuoyin: ["建索引", "添加索引"],
   charushuju: ["写入数据"],
 
+  // c2 Large language models
+  dayuyanmoxing: ["大模型"],
+  chuxianhuanjue: ["产生幻觉"],
+  weitiaomoxing: ["模型微调"],
+  diaoyongdamoxing: ["调用大语言模型"],
+  shangxiawentaichang: ["上下文过长"],
+
   // b6 Version control & teamwork
   banbenkongzhi: ["版本管理"],
   cangku: ["代码库", "代码仓库"],
@@ -137,6 +149,14 @@ export const translations: Record<string, string[]> = {
   daduandian: ["加断点", "设断点"],
   charizhi: ["看日志"],
   paochuyichang: ["抛异常"],
+
+  // c3 AI coding
+  daimabuquan: ["自动补全"],
+  gongjudiaoyong: ["函数调用"],
+  shaxiang: ["沙盒"],
+  chexiaoxiugai: ["回滚修改"],
+  geiquanxian: ["授予权限", "开权限"],
+  zaishaxiangliyunxing: ["在沙箱里跑", "在沙盒里运行"],
 
   // a7 Systems & concurrency
   neicunxielou: ["内存泄露"],

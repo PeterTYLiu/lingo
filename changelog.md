@@ -2,6 +2,15 @@
 
 All notable changes to 行话 are recorded here. Versions follow [Semantic Versioning](https://semver.org/).
 
+## 1.3.0 — 2026-10-22
+
+### Added
+- New AI track (人工智能, in green on the path) with three units, each with word lessons, phrase lessons and a capstone:
+  - 机器学习 Machine learning (after Data structures): 人工智能, 模型, 训练, 推理, 算力, 显卡, plus phrases like 训练模型 and 调参.
+  - 大模型 Large language models (after Databases): 提示词, 上下文窗口, 幻觉, 微调, 检索增强生成, plus phrases like 写提示词 and 调用大模型.
+  - AI编程 AI coding (after Testing & debugging): 智能体, 工具调用, 沙箱, 权限, 氛围编程, plus phrases like 让AI写代码 and 接受修改.
+- Fill-in-the-blank sentences and accepted synonyms for every new term.
+
 ## 1.2.1 — 2026-10-22
 
 ### Changed

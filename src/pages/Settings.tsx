@@ -68,7 +68,7 @@ export function Settings() {
     <div className="flex flex-col gap-8 px-5 py-5">
       <div>
         <h1 className="text-2xl font-extrabold">设置 Settings</h1>
-        <span className="text-sm text-slate-500">Version 1.2.1</span>
+        <span className="text-sm text-slate-500">Version 1.3.0</span>
       </div>
       <section className="divide-y-2 divide-slate-100">
         <Toggle

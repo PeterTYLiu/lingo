@@ -1,4 +1,5 @@
 import { resolvePhrase, type Lesson, type Term, type Unit } from "./types";
+import { c1, c2, c3 } from "./units/ai";
 import { a1, a2, a3, a4, a5, a6, a7, a8, a9 } from "./units/cs";
 import { sentences } from "./sentences";
 import { translations } from "./translations";
@@ -6,8 +7,8 @@ import { b1, b2, b3, b4, b5, b6, b7, b8, b9 } from "./units/web";
 
 export * from "./types";
 
-/** Learning-path order: the two tracks interleaved so web terms show up early. */
-const ordered = [a1, b1, a2, a3, b2, b3, a4, a5, b4, b5, a6, a9, b6, b7, a7, a8, b8, b9];
+/** Learning-path order: the tracks interleaved so web and AI terms show up early. */
+const ordered = [a1, b1, a2, a3, b2, b3, a4, a5, c1, b4, b5, a6, a9, c2, b6, b7, c3, a7, a8, b8, b9];
 
 export const units: Unit[] = ordered.map((u) => u.unit);
 export const allWords: Term[] = ordered.flatMap((u) => u.terms);

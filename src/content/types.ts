@@ -24,7 +24,7 @@ export type Term = {
 
 export type Lesson = { id: string; title: string; kind: "words" | "phrases" | "capstone"; termIds: string[] };
 
-export type Track = "cs" | "web";
+export type Track = "cs" | "web" | "ai";
 
 export type Unit = {
   id: string;

@@ -11,6 +11,7 @@ const TRACK_STYLE = {
     label: "计算机科学 · CS",
   },
   web: { bg: "bg-sky-500", border: "border-sky-700", label: "网页开发 · Web" },
+  ai: { bg: "bg-emerald-500", border: "border-emerald-700", label: "人工智能 · AI" },
 };
 
 export function Path() {

@@ -146,6 +146,24 @@ export const sentences: Record<string, string | [string, ...string[]]> = {
   fanzhuanlianbiao: ["面试题：给你一个1→2→3的链表，请__链表，让它变成3→2→1。", "反转"],
   kongzhizhen: "访问了一个指向null的__指针，程序直接崩溃了。",
 
+  // c1 Machine learning
+  rengongzhineng: "ChatGPT火了以后，__成了科技圈最热门的话题，人人都在谈AI。",
+  jiqixuexi: "人工智能里最核心的方法是__，让计算机从数据里自己找规律。",
+  shenduxuexi: "现在的AI大多基于__，也就是用很多层神经网络的机器学习。",
+  shenjingwangluo: "深度学习用的__由很多层神经元组成，灵感来自人脑。",
+  moxing: "我们用这批数据训练了一个新__，准确率比上一版高了五个点。",
+  xunlian: "这个模型的__花了三个月，用了上千张显卡。",
+  shujuji: "我们从网上收集了十万张猫狗图片，整理成一个__，用来训练分类模型。",
+  tuili: "模型训练好之后，每次用户提问时运行它算出答案，这个过程叫__，每次都要消耗算力。",
+  guonihe: "模型在训练数据上表现完美，一到新数据就不行，这是典型的__问题。",
+  suanli: "训练大模型需要海量的__，所以各家公司都在抢显卡。",
+  xianka: "英伟达的高端__现在一卡难求，做AI的公司都在排队买。",
+  xunlianmoxing: "我们花了两周时间__模型，终于让准确率达到了要求。",
+  biaozhushuju: "训练之前，得先请人__数据，告诉模型每张图片里是猫还是狗。",
+  tiaocan: "模型效果一直上不去，他花了一整天__参，学习率改了十几遍。",
+  paomoxing: "我在自己的笔记本上__模型，风扇响得跟飞机一样。",
+  suanlibugou: ["我们只有两张显卡，算力__，训练一次要好几天。", "不足"],
+
   // b4 Frontend frameworks
   kuangjia: "React、Vue和Angular是三大前端__，各有各的写法。",
   ku: ["lodash是一个常用的工具__，提供了很多处理数组和对象的函数。", "包"],
@@ -216,6 +234,27 @@ export const sentences: Record<string, string | [string, ...string[]]> = {
   charushuju: ["用INSERT语句往表里__数据，一次可以插好几行。", "写入", "添加"],
   tijiaoshiwu: "所有操作都成功后再__事务，如果出错就回滚。",
 
+  // c2 Large language models
+  dayuyanmoxing: ["ChatGPT背后是一个__，用海量文本训练出来，能理解和生成人类语言。", "大模型"],
+  tishici: "同样的问题，__写得越清楚，AI给的回答通常就越好。",
+  shangxiawen: "聊了太久以后，模型会忘掉前面的__，开始答非所问。",
+  shangxiawenchuangkou: "这个模型的__有二十万个token，能一次读完一整本书。",
+  ciyuan: ["大模型按__计费，一个汉字大约算一到两个。", "token"],
+  huanjue: "AI一本正经地编造了一篇根本不存在的论文，这就是大模型的__问题。",
+  yuxunlian: "大模型先在海量文本上__，学会语言的基本规律，然后再针对具体任务调整。",
+  weitiao: "我们用公司内部的客服对话数据__了一个开源模型，让它说话更像我们的客服。",
+  duomotai: "新版模型是__的，不光能读文字，还能看图片、听语音。",
+  xiangliang: "每段文字都被转换成一个__，意思相近的文字在空间里离得也近。",
+  jiansuozengqiangshengcheng: "先从公司文档里检索相关内容，再交给大模型回答，这种做法叫__，简称RAG。",
+  kaiyuanmoxing: "这家公司把权重公开放到了网上，任何人都能下载，所以它是一个__，可以自己部署。",
+  canshuliang: "这个模型的__有七百亿，普通电脑根本跑不动。",
+  xietishici: "让AI帮忙之前，先花点时间__提示词，把需求说清楚。",
+  wenai: "遇到看不懂的报错，我现在第一反应就是去__AI，比搜索快多了。",
+  chuxianhuanjue: ["模型偶尔会__幻觉，引用一些根本不存在的函数。", "产生"],
+  weitiaomoxing: "通用模型不懂医学术语，我们用医院的数据__模型，效果好了很多。",
+  diaoyongdamoxing: "后端每收到一个问题，就__大模型生成回答，再返回给前端。",
+  shangxiawentaichang: ["对话聊了几百轮，上下文__，模型开始忘记最开始说过的话。", "过长"],
+
   // b6 Version control & teamwork
   banbenkongzhi: "Git是目前最流行的__工具，可以记录代码的每一次修改。",
   cangku: ["我在GitHub上新建了一个__，把项目代码推了上去。", "repo"],
@@ -257,6 +296,25 @@ export const sentences: Record<string, string | [string, ...string[]]> = {
   charizhi: ["线上出问题了，先登录服务器__日志，找找是什么报错。", "看"],
   paochuyichang: "参数不合法时，函数应该__异常，而不是悄悄返回错误的结果。",
   buhuoyichang: "用try...catch__异常，避免程序直接崩溃。",
+
+  // c3 AI coding
+  zhinengti: "这个__能自己读代码、改文件、跑测试，不用人一步步告诉它怎么做。",
+  bianchengzhushou: "装了AI__之后，写样板代码快多了，它还能帮我解释看不懂的报错。",
+  daimabuquan: ["我刚敲了函数名，编辑器的__就把整个函数体都猜出来了。", "自动补全"],
+  gongjudiaoyong: "模型本身不能上网，但通过__，它可以执行搜索、读文件、运行命令。",
+  gongzuoliu: "我们把需求分析、写代码、测试、代码审查串成一个__，交给AI一步步完成。",
+  zidonghua: "每次发版都要手动做十几个步骤，太容易出错了，必须把流程__起来。",
+  shaxiang: ["让智能体在__里执行命令，就算它误删了文件也不会影响真实环境。", "沙盒"],
+  quanxian: "智能体想推送代码时会先请求__，我同意之后它才能执行。",
+  fenweibiancheng: "他完全不看代码，只跟AI描述想要的效果，一路点接受，这种做法被叫作__，在网上很火。",
+  tishicigongcheng: "怎样写提示词才能让模型稳定输出好结果，这门学问叫__，现在也算一个岗位了。",
+  rangaixiedaima: "现在很多程序员先让AI__代码，自己再负责审查和修改。",
+  shengchengdaima: "我把需求描述清楚，AI几秒钟就能__代码，还会顺手写好注释。",
+  chexiaoxiugai: ["AI把不该动的文件也改了，我直接__修改，让它重新来过。", "回滚"],
+  geiquanxian: ["你得先__权限，它才能读写这个目录。", "开"],
+  jieshouxiugai: "我检查了AI改的每一行，确认没问题后才点击__修改。",
+  zaishaxiangliyunxing: ["不确定这段脚本安不安全，最好先在沙箱里__一下。", "跑"],
+  zidonghuagongzuoliu: "有了智能体，我们把从提需求到上线的整个流程做成了__工作流。",
 
   // a7 Systems & concurrency
   jincheng: "每打开一个应用，操作系统就会创建一个__，在任务管理器里能看到它。",
