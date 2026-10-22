@@ -2,6 +2,11 @@
 
 All notable changes to 行话 are recorded here. Versions follow [Semantic Versioning](https://semver.org/).
 
+## 1.2.1 — 2026-10-22
+
+### Changed
+- No user-facing changes; release to test the deployment pipeline.
+
 ## 1.2.0 — 2026-10-22
 
 ### Added
