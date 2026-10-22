@@ -1,6 +1,6 @@
 import { getTerm, type Lesson, type Term } from "../content";
-import { canMorpheme, enToZh, intro, matchPairs, morpheme, pickVerb, shuffle, speak, tileBuild, typePinyin, zhToEn, type Rng } from "../exercises/generators";
-import type { Exercise } from "../exercises/types";
+import { canCloze, canMorpheme, cloze, enToZh, intro, matchPairs, morpheme, pickVerb, shuffle, speak, tileBuild, translate, typePinyin, zhToEn, type Rng } from "../exercises/generators";
+import type { Exercise, ExerciseKind } from "../exercises/types";
 import { daysUntilDue, type TermProgress } from "../store/srs";
 
 export type BuildOptions = { speaking: boolean; rng?: Rng };
@@ -11,21 +11,36 @@ function producers(t: Term, speaking: boolean): Producer[] {
   // Phrases practise collocation (which verb goes with the noun); typing a whole phrase in pinyin is just tedious.
   const ps: Producer[] = t.kind === "phrase" ? [pickVerb, tileBuild] : [tileBuild, (t) => typePinyin(t)];
   if (canMorpheme(t)) ps.push((t) => morpheme(t));
+  if (canCloze(t)) ps.push((t) => cloze(t));
+  ps.push((t) => translate(t));
   if (speaking) ps.push((t) => speak(t));
   return ps;
 }
 
-/** Pick one production exercise per term, spreading kinds and capping speaking at two per session. */
+/** Speaking and typing characters are slow, so a session gets at most two of each. */
+const CAPS: Partial<Record<ExerciseKind, number>> = { speak: 2, cloze: 2, translate: 2 };
+
+/**
+ * Pick one production exercise per term, spreading kinds and respecting CAPS.
+ * Two different terms are reserved, one for fill-in-the-blank and one for
+ * translation, so every session types characters both ways.
+ */
 function production(terms: Term[], speaking: boolean, rng: Rng): Exercise[] {
-  let speakCount = 0;
-  const counts: Record<string, number> = {};
+  const counts: Partial<Record<ExerciseKind, number>> = {};
+  const forCloze = shuffle(terms.filter(canCloze), rng)[0];
+  const forTranslate = shuffle(terms.filter((t) => t !== forCloze), rng)[0];
+  if (forCloze) counts.cloze = 1;
+  if (forTranslate) counts.translate = 1;
   return terms.map((t) => {
-    const options = producers(t, speaking && speakCount < 2).map((p) => p(t, rng));
+    if (t === forCloze) return cloze(t);
+    if (t === forTranslate) return translate(t);
+    const options = producers(t, speaking)
+      .map((p) => p(t, rng))
+      .filter((e) => (counts[e.kind] ?? 0) < (CAPS[e.kind] ?? Infinity));
     const least = Math.min(...options.map((e) => counts[e.kind] ?? 0));
     const candidates = options.filter((e) => (counts[e.kind] ?? 0) === least);
     const e = candidates[Math.floor(rng() * candidates.length)];
     counts[e.kind] = (counts[e.kind] ?? 0) + 1;
-    if (e.kind === "speak") speakCount++;
     return e;
   });
 }

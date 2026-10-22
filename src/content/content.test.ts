@@ -1,6 +1,8 @@
 import { describe, expect, it } from "vitest";
 import { pinyin } from "pinyin-pro";
-import { allLessons, allPhrases, allTerms, units, tokenize } from ".";
+import { allLessons, allPhrases, allTerms, clozes, units, tokenize } from ".";
+import { sentences } from "./sentences";
+import { translations } from "./translations";
 
 /** Terms whose standard reading differs from pinyin-pro's default (polyphones, neutral tones). */
 const READING_OVERRIDES = new Set<string>(["huidiaohanshu", "hang", "chongxiefangfa", "diaojiekou"]);
@@ -42,8 +44,40 @@ describe("content", () => {
     expect(new Set(hanzi).size).toBe(hanzi.length);
   });
 
+  it("sentences only reference real terms", () => {
+    const ids = new Set(allTerms.map((t) => t.id));
+    for (const id of Object.keys(sentences)) expect(ids.has(id), id).toBe(true);
+  });
+
+  it("translation alternates are Chinese, distinct, and not the term itself", () => {
+    const byId = new Map(allTerms.map((t) => [t.id, t]));
+    for (const [id, alts] of Object.entries(translations)) {
+      const t = byId.get(id);
+      expect(t, `unknown term ${id}`).toBeDefined();
+      expect(new Set(alts).size, `${id} duplicates`).toBe(alts.length);
+      for (const a of alts) {
+        expect(/\p{Script=Han}/u.test(a), `${id}: ${a} has no Chinese`).toBe(true);
+        expect(a, `${id} lists its own hanzi`).not.toBe(t!.hanzi);
+      }
+    }
+  });
+
   for (const t of allTerms) {
     describe(t.id, () => {
+      it("has a fill-in-the-blank sentence with context on both sides", () => {
+        const entry = sentences[t.id];
+        expect(entry, "missing sentence").toBeDefined();
+        const sentence = typeof entry === "string" ? entry : entry[0];
+        expect(sentence.split("__").length, "exactly one blank").toBe(2);
+        const { before, after, answers } = clozes.get(t.id)!;
+        const han = /\p{Script=Han}/u;
+        expect(han.test(before) && han.test(after), "Chinese context before and after the blank").toBe(true);
+        expect(before + answers[0] + after, "sentence contains the whole term").toContain(t.hanzi);
+        for (const a of answers) {
+          expect(before.includes(a) || after.includes(a), `answer ${a} appears outside the blank`).toBe(false);
+        }
+        expect(new Set(answers).size, "duplicate answers").toBe(answers.length);
+      });
       it("morphemes concatenate to hanzi", () => {
         expect(t.parts.map((m) => m.hanzi).join("")).toBe(t.hanzi);
       });

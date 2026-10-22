@@ -3,21 +3,39 @@ import { isRecognitionSupported } from "../speech/recognition";
 import { exportData, useProgress, type Settings as S } from "../store/progress";
 import { Button } from "../ui/Button";
 
-function Toggle({ label, hint, value, onChange }: { label: string; hint?: string; value: boolean; onChange: (v: boolean) => void }) {
+function Toggle({
+  label,
+  hint,
+  value,
+  onChange,
+}: {
+  label: string;
+  hint?: string;
+  value: boolean;
+  onChange: (v: boolean) => void;
+}) {
   return (
     <label className="flex items-center justify-between gap-4 py-3">
       <span>
         <span className="block font-semibold">{label}</span>
         {hint && <span className="text-sm text-slate-500">{hint}</span>}
       </span>
-      <input type="checkbox" checked={value} onChange={(e) => onChange(e.target.checked)} className="h-6 w-6 accent-green-500" />
+      <input
+        type="checkbox"
+        checked={value}
+        onChange={(e) => onChange(e.target.checked)}
+        className="h-6 w-6 accent-green-500"
+      />
     </label>
   );
 }
 
 export function Settings() {
   const state = useProgress();
-  const set = <K extends keyof S>(k: K) => (v: S[K]) => state.setSetting(k, v);
+  const set =
+    <K extends keyof S>(k: K) =>
+    (v: S[K]) =>
+      state.setSetting(k, v);
   const [importText, setImportText] = useState("");
   const [message, setMessage] = useState<string | null>(null);
   const [confirmReset, setConfirmReset] = useState(false);
@@ -34,7 +52,9 @@ export function Settings() {
   };
 
   const download = () => {
-    const url = URL.createObjectURL(new Blob([exportData(state)], { type: "application/json" }));
+    const url = URL.createObjectURL(
+      new Blob([exportData(state)], { type: "application/json" }),
+    );
     const a = document.createElement("a");
     a.href = url;
     a.download = `hanghua-progress-${new Date().toISOString().slice(0, 10)}.json`;
@@ -46,14 +66,30 @@ export function Settings() {
 
   return (
     <div className="flex flex-col gap-8 px-5 py-5">
-      <h1 className="text-2xl font-extrabold">设置 Settings</h1>
-
+      <div>
+        <h1 className="text-2xl font-extrabold">设置 Settings</h1>
+        <span className="text-sm text-slate-500">Version 1.2.0</span>
+      </div>
       <section className="divide-y-2 divide-slate-100">
-        <Toggle label="Show pinyin" hint="Pinyin above characters in exercises" value={state.settings.showPinyin} onChange={set("showPinyin")} />
-        <Toggle label="Audio" hint="Read terms aloud (needs a Chinese voice on your phone)" value={state.settings.audio} onChange={set("audio")} />
+        <Toggle
+          label="Show pinyin"
+          hint="Pinyin above characters in exercises"
+          value={state.settings.showPinyin}
+          onChange={set("showPinyin")}
+        />
+        <Toggle
+          label="Audio"
+          hint="Read terms aloud (needs a Chinese voice on your phone)"
+          value={state.settings.audio}
+          onChange={set("audio")}
+        />
         <Toggle
           label="Speaking exercises"
-          hint={isRecognitionSupported() ? "Say terms aloud; needs a connection" : "Not supported in this browser"}
+          hint={
+            isRecognitionSupported()
+              ? "Say terms aloud; needs a connection"
+              : "Not supported in this browser"
+          }
           value={state.settings.speaking}
           onChange={set("speaking")}
         />
@@ -61,9 +97,16 @@ export function Settings() {
 
       <section className="flex flex-col gap-3">
         <h2 className="text-lg font-bold">Backup</h2>
-        <p className="text-sm text-slate-500">Progress lives only on this device. Save a backup file (e.g. to Google Drive), then use "Restore from file" on another device.</p>
-        <Button variant="secondary" onClick={download}>Save backup</Button>
-        <Button variant="secondary" onClick={() => fileInput.current?.click()}>Restore from file</Button>
+        <p className="text-sm text-slate-500">
+          Progress lives only on this device. Save a backup file (e.g. to Google
+          Drive), then use "Restore from file" on another device.
+        </p>
+        <Button variant="secondary" onClick={download}>
+          Save backup
+        </Button>
+        <Button variant="secondary" onClick={() => fileInput.current?.click()}>
+          Restore from file
+        </Button>
         <input
           ref={fileInput}
           type="file"
@@ -76,22 +119,42 @@ export function Settings() {
           }}
         />
         <details>
-          <summary className="cursor-pointer text-sm text-slate-500">Or paste backup text</summary>
-          <textarea value={importText} onChange={(e) => setImportText(e.target.value)} className="mt-2 h-24 w-full rounded-xl border-2 border-slate-200 p-2 font-mono text-xs" />
-          <Button variant="secondary" className="mt-2 w-full" disabled={!importText.trim()} onClick={() => doImport(importText)}>
+          <summary className="cursor-pointer text-sm text-slate-500">
+            Or paste backup text
+          </summary>
+          <textarea
+            value={importText}
+            onChange={(e) => setImportText(e.target.value)}
+            className="mt-2 h-24 w-full rounded-xl border-2 border-slate-200 p-2 font-mono text-xs"
+          />
+          <Button
+            variant="secondary"
+            className="mt-2 w-full"
+            disabled={!importText.trim()}
+            onClick={() => doImport(importText)}
+          >
             Restore
           </Button>
         </details>
-        {message && <p className="text-sm font-semibold text-sky-600">{message}</p>}
+        {message && (
+          <p className="text-sm font-semibold text-sky-600">{message}</p>
+        )}
       </section>
 
       <section className="flex flex-col gap-3">
         <h2 className="text-lg font-bold">Reset</h2>
         {confirmReset ? (
           <div className="rounded-2xl border-2 border-rose-200 bg-rose-50 p-4">
-            <p className="mb-3 font-semibold text-rose-700">Erase all progress on this device? This can't be undone.</p>
+            <p className="mb-3 font-semibold text-rose-700">
+              Erase all progress on this device? This can't be undone.
+            </p>
             <div className="grid grid-cols-2 gap-3">
-              <Button variant="secondary" onClick={() => setConfirmReset(false)}>Cancel</Button>
+              <Button
+                variant="secondary"
+                onClick={() => setConfirmReset(false)}
+              >
+                Cancel
+              </Button>
               <Button
                 variant="danger"
                 onClick={() => {
@@ -105,7 +168,13 @@ export function Settings() {
             </div>
           </div>
         ) : (
-          <Button variant="ghost" className="text-rose-500" onClick={() => setConfirmReset(true)}>Reset progress</Button>
+          <Button
+            variant="ghost"
+            className="text-rose-500"
+            onClick={() => setConfirmReset(true)}
+          >
+            Reset progress
+          </Button>
         )}
       </section>
     </div>

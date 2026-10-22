@@ -20,6 +20,16 @@ export function checkPinyin(input: string, term: Term): boolean {
   return n.length > 0 && n === normalizePinyin(term.pinyin);
 }
 
+/**
+ * Typed characters (fill-in-the-blank, translate): ignores spacing, punctuation, case
+ * and full-width Latin (ＰＲ vs PR) so only the characters themselves count.
+ */
+export function checkHanzi(input: string, answers: string[]): boolean {
+  const norm = (s: string) => stripPunct(s.normalize("NFKC"));
+  const n = norm(input);
+  return n.length > 0 && answers.some((a) => norm(a) === n);
+}
+
 const stripPunct = (s: string) => s.replace(/[\s\p{P}\p{S}]/gu, "").toLowerCase();
 
 /**

@@ -102,6 +102,27 @@ describe("capstones", () => {
   });
 });
 
+describe("typing exercises", () => {
+  it("fill-in-the-blank and translate each appear once or twice in every lesson, review and capstone", () => {
+    const progress = Object.fromEntries(allTerms.slice(0, 10).map((t) => [t.id, { box: 1, lastSeen: "2026-10-01", correct: 1, wrong: 0 }]));
+    for (let seed = 0; seed < 3; seed++) {
+      const sessions = [
+        ...units.flatMap((u) => u.lessons.map((l) => [l.id, buildLesson(l, {}, today, { speaking: true, rng: seeded(seed) })] as const)),
+        ["review", buildReview(progress, today, { speaking: true, rng: seeded(seed) })] as const,
+      ];
+      for (const [id, steps] of sessions) {
+        for (const kind of ["cloze", "translate"] as const) {
+          const n = steps.filter((s) => s.kind === kind).length;
+          expect(n >= 1 && n <= 2, `${id}: ${n} ${kind}`).toBe(true);
+        }
+        const clozeIds = new Set(steps.filter((s) => s.kind === "cloze").map((s) => exerciseTermIds(s)[0]));
+        const translateIds = steps.filter((s) => s.kind === "translate").map((s) => exerciseTermIds(s)[0]);
+        expect(translateIds.some((tid) => !clozeIds.has(tid)), `${id}: translate only repeats a cloze term`).toBe(true);
+      }
+    }
+  });
+});
+
 describe("phrase lessons", () => {
   const phraseLessons = units.flatMap((u) => u.lessons.filter((l) => l.kind === "phrases"));
 

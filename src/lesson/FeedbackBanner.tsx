@@ -19,6 +19,13 @@ export function FeedbackBanner({ exercise, correct, onContinue }: { exercise: Ex
             <p>
               <Hanzi hanzi={term.hanzi} pinyin={term.pinyin} showPinyin className="text-2xl font-bold" /> <span className="ml-1">{term.english}</span>
             </p>
+            {exercise.kind === "cloze" && (
+              <p className="text-sm" lang="zh-CN">
+                {exercise.cloze.before}
+                <strong className="underline">{exercise.cloze.answers[0]}</strong>
+                {exercise.cloze.after}
+              </p>
+            )}
             {!correct && term.parts.length > 1 && (
               <p className="text-sm">{term.parts.map((m) => `${m.hanzi} ${m.gloss}`).join(" + ")}</p>
             )}

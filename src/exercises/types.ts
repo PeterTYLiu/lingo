@@ -1,4 +1,4 @@
-import type { Part, Term } from "../content";
+import type { Cloze, Part, Term } from "../content";
 
 export type Pair = { id: string; left: string; leftPinyin?: string; right: string };
 
@@ -12,6 +12,8 @@ export type Exercise = { key: string } & (
   | { kind: "morpheme"; term: Term; pairs: Pair[] }
   | { kind: "pick-verb"; term: Term; options: Part[] }
   | { kind: "speak"; term: Term }
+  | { kind: "cloze"; term: Term; cloze: Cloze }
+  | { kind: "translate"; term: Term; answers: string[] }
 );
 
 export type ExerciseKind = Exercise["kind"];

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { getTerm } from "../content";
-import { checkPinyin, matchSpeech, normalizePinyin } from "./check";
+import { checkHanzi, checkPinyin, matchSpeech, normalizePinyin } from "./check";
 
 describe("normalizePinyin", () => {
   it("ignores tones, spaces, case, and tone numbers", () => {
@@ -35,5 +35,20 @@ describe("matchSpeech", () => {
   });
   it("is case-insensitive for Latin parts", () => {
     expect(matchSpeech(["ip地址"], getTerm("ipdizhi"))).toBe(true);
+  });
+});
+
+describe("checkHanzi", () => {
+  it("accepts the answer or an alternate, ignoring spacing, punctuation, case and full width", () => {
+    expect(checkHanzi("提交", ["提交"])).toBe(true);
+    expect(checkHanzi(" 提交。", ["提交"])).toBe(true);
+    expect(checkHanzi("api", ["接口", "API"])).toBe(true);
+    expect(checkHanzi("ＡＰＩ", ["接口", "API"])).toBe(true);
+    expect(checkHanzi("code review", ["代码审查", "code review"])).toBe(true);
+  });
+  it("rejects wrong, partial, or empty input", () => {
+    expect(checkHanzi("提", ["提交"])).toBe(false);
+    expect(checkHanzi("提交了", ["提交"])).toBe(false);
+    expect(checkHanzi("  ", ["提交"])).toBe(false);
   });
 });

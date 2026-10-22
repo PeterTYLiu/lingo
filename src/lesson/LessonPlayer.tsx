@@ -1,12 +1,14 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Choice } from "../exercises/components/Choice";
+import { Cloze } from "../exercises/components/Cloze";
 import { Intro } from "../exercises/components/Intro";
 import { PairMatch } from "../exercises/components/PairMatch";
 import { PickVerb } from "../exercises/components/PickVerb";
 import type { Result } from "../exercises/components/props";
 import { Speak } from "../exercises/components/Speak";
 import { TileBuild } from "../exercises/components/TileBuild";
+import { Translate } from "../exercises/components/Translate";
 import { TypePinyin } from "../exercises/components/TypePinyin";
 import { requeue } from "../exercises/generators";
 import { exerciseTermIds, type Exercise } from "../exercises/types";
@@ -104,6 +106,8 @@ export function LessonPlayer({ initial, lessonId, baseXp, onComplete }: Props) {
         {current.kind === "type-pinyin" && <TypePinyin exercise={current} {...common} />}
         {current.kind === "pick-verb" && <PickVerb exercise={current} {...common} />}
         {current.kind === "speak" && <Speak exercise={current} {...common} />}
+        {current.kind === "cloze" && <Cloze exercise={current} {...common} />}
+        {current.kind === "translate" && <Translate exercise={current} {...common} />}
       </main>
 
       {feedback ? (

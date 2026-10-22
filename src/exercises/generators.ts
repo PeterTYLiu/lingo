@@ -1,4 +1,4 @@
-import { allTerms, tokenize, unitByTermId, type Term } from "../content";
+import { allTerms, clozes, tokenize, translationAnswers, unitByTermId, type Term } from "../content";
 import type { Exercise } from "./types";
 
 export type Rng = () => number;
@@ -111,6 +111,12 @@ export function morpheme(term: Term): Exercise {
     pairs: term.parts.map((m, i) => ({ id: `${term.id}-${i}`, left: m.hanzi, leftPinyin: m.pinyin, right: m.gloss })),
   };
 }
+
+export const canCloze = (term: Term) => clozes.has(term.id);
+
+export const cloze = (term: Term): Exercise => ({ key: key("cloze", term.id), kind: "cloze", term, cloze: clozes.get(term.id)! });
+
+export const translate = (term: Term): Exercise => ({ key: key("translate", term.id), kind: "translate", term, answers: translationAnswers.get(term.id)! });
 
 export const speak = (term: Term): Exercise => ({ key: key("speak", term.id), kind: "speak", term });
 
