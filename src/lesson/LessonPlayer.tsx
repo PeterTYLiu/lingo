@@ -119,7 +119,7 @@ export function LessonPlayer({ initial, lessonId, baseXp, onComplete }: Props) {
           ) : current.kind === "match-pairs" || current.kind === "morpheme" || current.kind === "speak" ? (
             <div className="h-12" />
           ) : (
-            <Button className="w-full" disabled={!grader} onClick={check}>Check</Button>
+            <Button variant="check" className="w-full" disabled={!grader} onClick={check}>Check</Button>
           )}
         </footer>
       )}

@@ -2,6 +2,11 @@
 
 All notable changes to 行话 are recorded here. Versions follow [Semantic Versioning](https://semver.org/).
 
+## 1.3.1 — 2026-10-22
+
+### Changed
+- In lessons, the Check button is now blue, so it stands apart from the green Continue button.
+
 ## 1.3.0 — 2026-10-22
 
 ### Added
