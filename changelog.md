@@ -2,6 +2,11 @@
 
 All notable changes to 行话 are recorded here. Versions follow [Semantic Versioning](https://semver.org/).
 
+## 1.3.2 — 2026-10-27
+
+### Fixed
+- Pressing a sound button no longer nudges the content below it (most visible in multiple-choice questions with pinyin turned off).
+
 ## 1.3.1 — 2026-10-22
 
 ### Changed
