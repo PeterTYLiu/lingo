@@ -7,7 +7,8 @@ import { translations } from "./translations";
 /** Terms whose standard reading differs from pinyin-pro's default (polyphones, neutral tones). */
 const READING_OVERRIDES = new Set<string>(["huidiaohanshu", "hang", "chongxiefangfa", "diaojiekou"]);
 
-const stripTones = (s: string) => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+/** Drops tone marks but keeps ü, which pinyin-pro also keeps in toneless output (lü). */
+const stripTones = (s: string) => s.normalize("NFD").replace(/[\u0300\u0301\u0304\u030c]/g, "").normalize("NFC").toLowerCase();
 
 describe("content", () => {
   it("has unique term ids", () => {

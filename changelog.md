@@ -2,6 +2,18 @@
 
 All notable changes to 行话 are recorded here. Versions follow [Semantic Versioning](https://semver.org/).
 
+## 1.4.0 — 2026-11-03
+
+### Added
+- New GIS track (地理信息, in orange on the path) with three units, each with word lessons, phrase lessons and a capstone:
+  - 地图与坐标 Maps & coordinates (after Algorithms): 地理信息系统, 坐标, 经度, 纬度, 比例尺, 地图投影, 坐标系, 高程, plus phrases like 获取经纬度 and 坐标转换.
+  - 空间数据 Spatial data (after Large language models): 矢量数据, 栅格数据, 图层, 要素, 空间索引, 缓冲区, 叠加分析, 地理编码, plus phrases like 添加图层 and 空间查询.
+  - 测绘与遥感 Surveying & remote sensing (after Networking): 测绘, 全站仪, 卫星定位, 遥感, 无人机, 点云, 激光雷达, 数字高程模型, 精度, plus phrases like 采集点云 and 跑外业.
+- Fill-in-the-blank sentences and accepted synonyms for every new term.
+
+### Fixed
+- The content test's pinyin check no longer drops ü (it compared lü as lu).
+
 ## 1.3.2 — 2026-10-27
 
 ### Fixed

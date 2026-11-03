@@ -111,6 +111,14 @@ export const translations: Record<string, string[]> = {
   duishuzupaixu: ["数组排序", "给数组排序"],
   jiangdishijianfuzadu: ["减少时间复杂度"],
 
+  // d1 Maps & coordinates
+  ditutouying: ["投影"],
+  zuobiaoxi: ["坐标系统"],
+  gaocheng: ["海拔"],
+  huoqujingweidu: ["获取坐标"],
+  zuobiaozhuanhuan: ["坐标变换"],
+  huizhiditu: ["画地图"],
+
   // a9 Databases
   guanxixingshujuku: ["关系数据库"],
   biao: ["表格", "数据表"],
@@ -126,6 +134,11 @@ export const translations: Record<string, string[]> = {
   weitiaomoxing: ["模型微调"],
   diaoyongdamoxing: ["调用大语言模型"],
   shangxiawentaichang: ["上下文过长"],
+
+  // d2 Spatial data
+  shangeshuju: ["栅格"],
+  jianlihuanchongqu: ["创建缓冲区", "生成缓冲区"],
+  chuangjiankongjiansuoyin: ["建立空间索引"],
 
   // b6 Version control & teamwork
   banbenkongzhi: ["版本管理"],
@@ -175,6 +188,11 @@ export const translations: Record<string, string[]> = {
   wangluoyanchigao: ["网络延迟大"],
   peizhifanghuoqiang: ["设置防火墙"],
   fasongshujubao: ["发数据包"],
+
+  // d3 Surveying & remote sensing
+  weixingdingwei: ["卫星导航"],
+  weixingyingxiang: ["卫星图像", "卫星图"],
+  tigaojingdu: ["提升精度"],
 
   // b8 Deployment & ops
   shangxian: ["发布"],

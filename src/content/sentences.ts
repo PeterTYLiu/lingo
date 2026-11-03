@@ -216,6 +216,24 @@ export const sentences: Record<string, string | [string, ...string[]]> = {
   jiangdishijianfuzadu: ["用哈希表代替两层循环，可以__时间复杂度，从O(n²)变成O(n)。", "减少"],
   shuati: "为了准备面试，他每天在LeetCode上__题，已经做了五百道。",
 
+  // d1 Maps & coordinates
+  dilixinxixitong: "城市规划局用__管理全市的道路、管线和地块数据，简称GIS。",
+  ditu: "出门旅游前，我先在手机__上把要去的景点都标了出来。",
+  zuobiao: "每个点的位置都用一对__表示，比如经度和纬度。",
+  jingdu: "格林尼治天文台所在的位置，__被定为零度。",
+  weidu: "赤道的__是零度，越往北极走数值越大。",
+  bilichi: "这张地图的__是一比一万，图上一厘米代表实际一百米。",
+  ditutouying: "地球是个球体，要画到平面上就必须选择一种__，墨卡托就是最常见的一种。",
+  zuobiaoxi: "国内的地图数据用的是加密后的__，直接叠加GPS测得的点会偏几百米。",
+  gaocheng: "等高线把__相同的点连在一起，线越密说明坡越陡。",
+  tuli: "看不懂地图上的符号时，先看看角落里的__，它会解释每种颜色代表什么。",
+  kanditu: "他不会__地图，每次出门都靠导航软件。",
+  huoqujingweidu: ["小程序先请求定位权限，然后__经纬度，显示附近的餐厅。", "拿到"],
+  zuobiaozhuanhuan: "把GPS测得的坐标叠加到国内地图上之前，需要先做一次坐标__，否则位置会偏。",
+  fangdaditu: "用两根手指在屏幕上张开，就可以__地图，看清楚每条小路。",
+  suoxiaoditu: "两根手指往里捏，就能__地图，看到整个城市。",
+  huizhiditu: ["考古队根据测量数据__地图，标出了每处遗址的位置。", "画"],
+
   // a9 Databases
   shujuku: "用户的账号和密码都存在后端的__里，比如MySQL。",
   guanxixingshujuku: "MySQL和PostgreSQL都是__，数据存在一张张表里，可以用SQL查询。",
@@ -254,6 +272,25 @@ export const sentences: Record<string, string | [string, ...string[]]> = {
   weitiaomoxing: "通用模型不懂医学术语，我们用医院的数据__模型，效果好了很多。",
   diaoyongdamoxing: "后端每收到一个问题，就__大模型生成回答，再返回给前端。",
   shangxiawentaichang: ["对话聊了几百轮，上下文__，模型开始忘记最开始说过的话。", "过长"],
+
+  // d2 Spatial data
+  shiliangshuju: "道路、河流和行政边界通常用点、线、面来表示，属于__，放大多少倍都不会模糊。",
+  shangeshuju: "卫星影像由一个个像素格子组成，是典型的__，放大后会看到马赛克。",
+  tuceng: "我在地图上叠了三个__：底图、道路和兴趣点，可以分别显示或隐藏。",
+  yaosu: "地图上的每一条河、每一栋楼都是一个__，有自己的几何形状和属性。",
+  shuxingbiao: "点开这个图层的__，可以看到每块地的面积、用途和权属人。",
+  kongjianshujuku: "我们把所有地块数据存进了PostGIS这个__，可以直接用SQL查距离和范围。",
+  kongjiansuoyin: "数据量上百万后，查附近的点变得很慢，加了__之后快了几十倍。",
+  huanchongqu: "沿着河道两侧各划出五百米的__，看看有哪些村庄在洪水风险范围内。",
+  diejiafenxi: "把土地利用图层和洪水淹没图层放在一起做__，就能算出受灾的耕地面积。",
+  fenbianlv: "这颗卫星拍的影像__是零点五米，能看清路上的汽车。",
+  tuopu: "相邻地块之间不能有缝隙或重叠，检查这类问题叫__检查。",
+  dilibianma: "把“中关村大街1号”这样的地址转换成经纬度，这个过程叫__，是地图服务最常用的功能之一。",
+  tianjiatuceng: "打开QGIS后，先__图层，把下载好的道路数据加载进来。",
+  yincangtuceng: "取消勾选复选框就能__图层，再勾上它就又显示出来了。",
+  jianlihuanchongqu: ["以每个地铁站为中心__缓冲区，半径设为八百米，就能算出步行可达的范围。", "生成", "创建"],
+  kongjianchaxun: "用户点一下地图，后端就做一次空间__，找出一公里内的所有药店。",
+  chuangjiankongjiansuoyin: ["给几何字段__空间索引以后，范围查询从十秒降到了几十毫秒。", "建立", "加"],
 
   // b6 Version control & teamwork
   banbenkongzhi: "Git是目前最流行的__工具，可以记录代码的每一次修改。",
@@ -353,6 +390,25 @@ export const sentences: Record<string, string | [string, ...string[]]> = {
   wangluoyanchigao: ["今天网络延迟__，打开一个网页要等好几秒。", "大"],
   peizhifanghuoqiang: ["运维同事正在__防火墙，只允许公司内网的IP访问数据库。", "设置"],
   fasongshujubao: "客户端向服务器__数据包，服务器收到后回复一个确认。",
+
+  // d3 Surveying & remote sensing
+  cehui: "他大学学的是__工程，毕业后去了国土部门做地形图。",
+  celiang: "施工前，工程师先用仪器__了这块地的面积和高差。",
+  quanzhanyi: "工地上那台架在三脚架上的__能同时测角度和距离，是测量员最常用的仪器。",
+  weixingdingwei: "手机里的__芯片能同时接收北斗和GPS信号，定位误差只有几米。",
+  yaogan: "通过对比不同年份的__影像，可以看出这片森林被砍伐了多少。",
+  weixingyingxiang: "地图软件切换到卫星模式后，看到的就是__，连楼顶的太阳能板都看得清。",
+  hangpai: "婚礼上请了专业团队用无人机__，拍出来的画面特别壮观。",
+  wurenji: "以前测一片山区要好几周，现在用__飞一圈，半天就能完成。",
+  dianyun: "激光雷达扫描一遍后，得到几亿个带坐标的点，这些点合起来叫__，可以用来重建三维场景。",
+  jiguangleida: "自动驾驶汽车车顶上那个转个不停的装置就是__，用激光测量周围物体的距离。",
+  shuzigaochengmoxing: "用规则网格记录每个位置的地面高度，这种数据叫__，简称DEM。",
+  "jingdu-precision": "普通手机定位的__大概是五到十米，测绘级设备能做到厘米级。",
+  feiwurenji: "周末他去郊区__无人机，拍了一组日落的照片。",
+  caijidianyun: "我们开着装了激光雷达的车在城里转了一圈，__点云用来做高精地图。",
+  jieyiyingxiang: "专家通过__卫星影像，找出了今年新增的违章建筑。",
+  tigaojingdu: ["加上地面控制点之后，可以大大__精度，误差缩小到几厘米。", "提升"],
+  paowaiye: "测绘院的新人第一年基本都在__外业，风吹日晒。",
 
   // b8 Deployment & ops
   bushu: ["代码写好了，下一步是把它__到服务器上，让用户能访问。", "发布"],
