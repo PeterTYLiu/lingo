@@ -3,6 +3,8 @@ import { isRecognitionSupported } from "../speech/recognition";
 import { exportData, useProgress, type Settings as S } from "../store/progress";
 import { Button } from "../ui/Button";
 
+const VERSION = "1.4.0";
+
 function Toggle({
   label,
   hint,
@@ -68,7 +70,12 @@ export function Settings() {
     <div className="flex flex-col gap-8 px-5 py-5">
       <div>
         <h1 className="text-2xl font-extrabold">设置 Settings</h1>
-        <span className="text-sm text-slate-500">Version 1.4.0</span>
+        <a
+          className="text-sm text-blue-600 hover:underline"
+          href="https://github.com/PeterTYLiu/lingo/blob/main/changelog.md"
+        >
+          Version {VERSION}
+        </a>
       </div>
       <section className="divide-y-2 divide-slate-100">
         <Toggle
